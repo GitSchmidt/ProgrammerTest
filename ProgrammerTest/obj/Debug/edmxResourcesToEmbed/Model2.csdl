@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProgrammingTestModel1" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ProgrammingTestEntities1" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Question" EntityType="ProgrammingTestModel1.Question" />
+    <EntitySet Name="TopicList" EntityType="ProgrammingTestModel1.TopicList" />
+    <AssociationSet Name="Question_TopicList" Association="ProgrammingTestModel1.Question_TopicList">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="TopicList" EntitySet="TopicList" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="QuestionTitle" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="QuestionText" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="TopicId" />
+    <NavigationProperty Name="TopicList" Relationship="ProgrammingTestModel1.Question_TopicList" FromRole="Question" ToRole="TopicList" />
+  </EntityType>
+  <EntityType Name="TopicList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="TopicListName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Question" Relationship="ProgrammingTestModel1.Question_TopicList" FromRole="TopicList" ToRole="Question" />
+  </EntityType>
+  <Association Name="Question_TopicList">
+    <End Type="ProgrammingTestModel1.Question" Role="Question" Multiplicity="*" />
+    <End Type="ProgrammingTestModel1.TopicList" Role="TopicList" Multiplicity="*" />
+  </Association>
+</Schema>

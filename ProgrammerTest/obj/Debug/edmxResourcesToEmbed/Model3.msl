@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProgrammingTestModelStoreContainer" CdmEntityContainer="ProgrammingTestEntities2">
+    <EntitySetMapping Name="Customer">
+      <EntityTypeMapping TypeName="ProgrammingTestModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Question">
+      <EntityTypeMapping TypeName="ProgrammingTestModel.Question">
+        <MappingFragment StoreEntitySet="Question">
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+          <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+          <ScalarProperty Name="QuestionTitle" ColumnName="QuestionTitle" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Test">
+      <EntityTypeMapping TypeName="ProgrammingTestModel.Test">
+        <MappingFragment StoreEntitySet="Test">
+          <ScalarProperty Name="TestName" ColumnName="TestName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Customer_Test" TypeName="ProgrammingTestModel.Customer_Test" StoreEntitySet="Customer_Test">
+      <EndProperty Name="Test">
+        <ScalarProperty Name="id" ColumnName="Test_Id" />
+      </EndProperty>
+      <EndProperty Name="Customer">
+        <ScalarProperty Name="id" ColumnName="Customer_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Test_Question" TypeName="ProgrammingTestModel.Test_Question" StoreEntitySet="Test_Question">
+      <EndProperty Name="Test">
+        <ScalarProperty Name="id" ColumnName="Question_Id" />
+      </EndProperty>
+      <EndProperty Name="Question">
+        <ScalarProperty Name="id" ColumnName="Test_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

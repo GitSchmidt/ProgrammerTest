@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProgrammingTestModel1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ProgrammingTestModel1StoreContainer">
+    <EntitySet Name="Question" EntityType="ProgrammingTestModel1.Store.Question" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Question_TopicList" EntityType="ProgrammingTestModel1.Store.Question_TopicList" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TopicList" EntityType="ProgrammingTestModel1.Store.TopicList" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Question_TopicList_Question" Association="ProgrammingTestModel1.Store.FK_Question_TopicList_Question">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="Question_TopicList" EntitySet="Question_TopicList" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Question_TopicList_TopicList" Association="ProgrammingTestModel1.Store.FK_Question_TopicList_TopicList">
+      <End Role="TopicList" EntitySet="TopicList" />
+      <End Role="Question_TopicList" EntitySet="Question_TopicList" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuestionText" Type="nvarchar(max)" />
+    <Property Name="TopicId" Type="int" />
+  </EntityType>
+  <EntityType Name="Question_TopicList">
+    <Key>
+      <PropertyRef Name="question_id" />
+      <PropertyRef Name="topiclist_id" />
+    </Key>
+    <Property Name="question_id" Type="int" Nullable="false" />
+    <Property Name="topiclist_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TopicList">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TopicListName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Question_TopicList_Question">
+    <End Role="Question" Type="ProgrammingTestModel1.Store.Question" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Question_TopicList" Type="ProgrammingTestModel1.Store.Question_TopicList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Question_TopicList">
+        <PropertyRef Name="topiclist_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Question_TopicList_TopicList">
+    <End Role="TopicList" Type="ProgrammingTestModel1.Store.TopicList" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Question_TopicList" Type="ProgrammingTestModel1.Store.Question_TopicList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TopicList">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Question_TopicList">
+        <PropertyRef Name="question_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

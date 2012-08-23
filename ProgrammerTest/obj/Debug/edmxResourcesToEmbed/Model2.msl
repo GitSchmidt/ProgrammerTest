@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ProgrammingTestModel1StoreContainer" CdmEntityContainer="ProgrammingTestEntities1">
+    <EntitySetMapping Name="Question">
+      <EntityTypeMapping TypeName="ProgrammingTestModel1.Question">
+        <MappingFragment StoreEntitySet="Question">
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+          <ScalarProperty Name="QuestionText" ColumnName="QuestionText" />
+          <ScalarProperty Name="QuestionTitle" ColumnName="QuestionTitle" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TopicList">
+      <EntityTypeMapping TypeName="ProgrammingTestModel1.TopicList">
+        <MappingFragment StoreEntitySet="TopicList">
+          <ScalarProperty Name="TopicListName" ColumnName="TopicListName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Question_TopicList" TypeName="ProgrammingTestModel1.Question_TopicList" StoreEntitySet="Question_TopicList">
+      <EndProperty Name="TopicList">
+        <ScalarProperty Name="id" ColumnName="question_id" />
+      </EndProperty>
+      <EndProperty Name="Question">
+        <ScalarProperty Name="id" ColumnName="topiclist_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProgrammingTestModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ProgrammingTestModelStoreContainer">
+    <EntitySet Name="Customer" EntityType="ProgrammingTestModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customer_Test" EntityType="ProgrammingTestModel.Store.Customer_Test" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Question" EntityType="ProgrammingTestModel.Store.Question" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Test" EntityType="ProgrammingTestModel.Store.Test" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Test_Question" EntityType="ProgrammingTestModel.Store.Test_Question" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Customer_Test_Customer" Association="ProgrammingTestModel.Store.FK_Customer_Test_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Customer_Test" EntitySet="Customer_Test" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Customer_Test_Test" Association="ProgrammingTestModel.Store.FK_Customer_Test_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="Customer_Test" EntitySet="Customer_Test" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Question_TopicList_Question" Association="ProgrammingTestModel.Store.FK_Question_TopicList_Question">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="Test_Question" EntitySet="Test_Question" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Question_TopicList_TopicList" Association="ProgrammingTestModel.Store.FK_Question_TopicList_TopicList">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="Test_Question" EntitySet="Test_Question" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Customer_Test">
+    <Key>
+      <PropertyRef Name="Customer_Id" />
+      <PropertyRef Name="Test_Id" />
+    </Key>
+    <Property Name="Customer_Id" Type="int" Nullable="false" />
+    <Property Name="Test_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionTitle" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuestionText" Type="nvarchar(max)" />
+    <Property Name="TestId" Type="int" />
+  </EntityType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="TestName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Test_Question">
+    <Key>
+      <PropertyRef Name="Question_Id" />
+      <PropertyRef Name="Test_Id" />
+    </Key>
+    <Property Name="Question_Id" Type="int" Nullable="false" />
+    <Property Name="Test_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Customer_Test_Customer">
+    <End Role="Customer" Type="ProgrammingTestModel.Store.Customer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Customer_Test" Type="ProgrammingTestModel.Store.Customer_Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Customer_Test">
+        <PropertyRef Name="Customer_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Customer_Test_Test">
+    <End Role="Test" Type="ProgrammingTestModel.Store.Test" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Customer_Test" Type="ProgrammingTestModel.Store.Customer_Test" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Customer_Test">
+        <PropertyRef Name="Test_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Question_TopicList_Question">
+    <End Role="Question" Type="ProgrammingTestModel.Store.Question" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Test_Question" Type="ProgrammingTestModel.Store.Test_Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Test_Question">
+        <PropertyRef Name="Test_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Question_TopicList_TopicList">
+    <End Role="Test" Type="ProgrammingTestModel.Store.Test" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Test_Question" Type="ProgrammingTestModel.Store.Test_Question" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Test_Question">
+        <PropertyRef Name="Question_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

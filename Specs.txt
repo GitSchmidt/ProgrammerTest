@@ -1,0 +1,12 @@
+Ein Kunde  ERSTELLT UND NUTZT mehrere Tests
+	er bucht fertige Tests, erstellt eigene, modifiziert bestehende oder gibt Auftrag, Tests zu bauen
+
+Ein Test   BESTEHT AUS mehreren Themen (C# Anfänger, C# Pro, SQL)
+	Ich erstelle möglichst viele gute Tests, und werbe mit ihnen/setze sie ein
+	Tests vom Kunden werden normalerweise nicht von mir verändert.
+	Es sollte Versionierung geben.
+
+Eine Thema ENTHÄLT viele Questions
+	Ich erstelle sorgfältig Questions und ordne sie verschiedenen Tests zu. Ich überlege,
+	inwieweit eine Frage zu mehreren Tests hinzugefügt werden kann
+	Es gibt das Kriterium "Gebiet", z.B. C# oder SQL oder Algo

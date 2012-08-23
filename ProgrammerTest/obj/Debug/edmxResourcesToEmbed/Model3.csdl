@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProgrammingTestModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ProgrammingTestEntities2" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Customer" EntityType="ProgrammingTestModel.Customer" />
+    <EntitySet Name="Question" EntityType="ProgrammingTestModel.Question" />
+    <EntitySet Name="Test" EntityType="ProgrammingTestModel.Test" />
+    <AssociationSet Name="Customer_Test" Association="ProgrammingTestModel.Customer_Test">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Test" EntitySet="Test" />
+    </AssociationSet>
+    <AssociationSet Name="Test_Question" Association="ProgrammingTestModel.Test_Question">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="Test" EntitySet="Test" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CustomerName" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Test" Relationship="ProgrammingTestModel.Customer_Test" FromRole="Customer" ToRole="Test" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="QuestionTitle" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="QuestionText" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="TestId" />
+    <NavigationProperty Name="Test" Relationship="ProgrammingTestModel.Test_Question" FromRole="Question" ToRole="Test" />
+  </EntityType>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="TestName" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Customer" Relationship="ProgrammingTestModel.Customer_Test" FromRole="Test" ToRole="Customer" />
+    <NavigationProperty Name="Question" Relationship="ProgrammingTestModel.Test_Question" FromRole="Test" ToRole="Question" />
+  </EntityType>
+  <Association Name="Customer_Test">
+    <End Type="ProgrammingTestModel.Customer" Role="Customer" Multiplicity="*" />
+    <End Type="ProgrammingTestModel.Test" Role="Test" Multiplicity="*" />
+  </Association>
+  <Association Name="Test_Question">
+    <End Type="ProgrammingTestModel.Question" Role="Question" Multiplicity="*" />
+    <End Type="ProgrammingTestModel.Test" Role="Test" Multiplicity="*" />
+  </Association>
+</Schema>
